@@ -53,7 +53,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate, 2000, 2000)
         
         mapView.setRegion(coordinateRegion, animated: true)
-        print("map centered")
     }
     
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
@@ -61,7 +60,6 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
             if !mapHasCenteredOnce {
                 centerMapOnLocation(location: loc)
                 mapHasCenteredOnce = true
-                print("\(mapHasCenteredOnce)")
             }
         }
     }
@@ -80,6 +78,7 @@ class ViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDele
         } else {
             let av = MKAnnotationView(annotation: annotation, reuseIdentifier: annoIdentifier)
             av.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
+            annotationView = av
         }
         if let annotationView = annotationView, let anno = annotation as? PokeAnnotation {
             annotationView.canShowCallout = true
